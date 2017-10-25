@@ -6,7 +6,7 @@
 
 /**
  *
- * @author symac
+ * @author Wolf Paradise
  */
 public class ListaPrestamo {
     
