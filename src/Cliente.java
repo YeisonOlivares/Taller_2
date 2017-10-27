@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Clase Cliente
  * @author Yeison Olivares, Rodrigo Dominguez
@@ -64,15 +58,24 @@ public class Cliente {
     public int getCelular(){
         return this.celular;
     }
-    
+    /**
+     * Obtener el email
+     * @return retorna el correo consultado
+     */
     public String getEmail(){
         return this.email;
     }
-    
+    /**
+     * Obtener lista de prestamo
+     * @return retorna la lista de prestamo consultada asociada a un cliente
+     */
     public ListaPrestamo getlistaPrestamo(){
         return this.listaPrestamo;
     }
-    
+    /**
+     * Cambiar el nombre del cliente
+     * @param nombre Corresponde al nuevo nombre que reemplazará al antiguo
+     */
     public void setNombre(String nombre){
         this.nombre = nombre;
     }

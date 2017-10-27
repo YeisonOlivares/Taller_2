@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import ucn.*;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
@@ -11,10 +6,14 @@ import java.util.Date;
 
 /**
  *
- * @author Wolf Paradise
+ * @author Yeison Olivares, Rodrigo Dominguez
  */
 public class main {
-    
+    /**
+     * Clase main
+     * @param args Contiene todas las invocaciones de las distintas clases para su ejecución
+     * @throws ParseException Corresponde a los posibles errores en caso que el formato de fecha sea incorrecto
+     */
     public static void main(String[] args) throws ParseException{
         int contarClientes = ContarCliente("Textos/Clientes.txt");
         int contarLibros = ContarLibro("Textos/Libros.txt");
@@ -30,7 +29,12 @@ public class main {
         
         
     }
-
+    
+    /**
+     * Contador cliente
+     * @param textosClientestxt Corresponde a la dirección en donde se encuentra el archivo de texto clientes
+     * @return retorna el contador de lineas por registro del archivo clientes
+     */
     private static int ContarCliente(String textosClientestxt) {
         int contar = 0;
         In archivo = new In ("Textos/Clientes.txt");                    
@@ -41,7 +45,12 @@ public class main {
         archivo.close();
         return contar;
     }
-
+    
+    /**
+     * Contador libros
+     * @param textosLibrostxt Corresponde a la dirección en donde se encuentra el archivo de texto libros
+     * @return retorna el contador de lineas por registro del archivo libros
+     */
     private static int ContarLibro(String textosLibrostxt) {
         int contar = 0;
         In archivo = new In ("Textos/Libros.txt");                    
@@ -52,7 +61,12 @@ public class main {
         archivo.close();
         return contar;
     }
-
+    
+    /**
+     * Contador prestamos
+     * @param textosPrestamostxt Corresponde a la dirección en donde se encuentra el archivo de texto prestamos
+     * @return retorna el contador de lineas por registro del archivo prestamos
+     */
     private static int ContarPrestamo(String textosPrestamostxt) {
         int contar = 0;
         In archivo = new In ("Textos/Prestamos.txt");                    
@@ -63,7 +77,11 @@ public class main {
         archivo.close();
         return contar;
     }
-
+    
+    /**
+     * Generar lista clientes
+     * @param cliente Corresponde al contenedor que almacena objetos de tipo cliente
+     */
     private static void GenerarListaClientes(ListaCliente cliente) {    
         In archivo = new In("Textos/Clientes.txt");
         String linea = archivo.readLine();
@@ -90,7 +108,12 @@ public class main {
         }
         archivo.close();
     }
-
+    
+    /**
+     * Generar lista libros
+     * @param libro Corresponde al contenedor que almacena objetos de tipo libro
+     * @throws ParseException Corresponde a los posibles errores productos del incorrecto formato de fecha sea incorrecto
+     */
     private static void GenerarListaLibros(ListaLibro libro) throws ParseException {
         In archivo = new In("Textos/Libros.txt");
         String linea = archivo.readLine();
@@ -119,7 +142,12 @@ public class main {
         }
         archivo.close();
     }
-
+    
+    /**
+     * Generar lista prestamo
+     * @param prestamo Corresponde al contenedor que almacena objetos de tipo prestamo
+     * @throws ParseException Corresponde a los posibles errores productos del incorrecto formato de fecha sea incorrecto
+     */
     private static void GenerarListaPrestamos(ListaPrestamo prestamo) throws ParseException {
         In archivo = new In("Textos/Prestamos.txt");
         String linea = archivo.readLine();
