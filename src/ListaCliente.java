@@ -12,7 +12,7 @@ public class ListaCliente {
     
     /**
      * Constructor de la lista
-     * @param maxCliente asigna el valor de 0 a la lista recien creada
+     * @param maxCliente asigna el valor máximo que puede contener la lista
      */
     public ListaCliente(int maxCliente){
         
@@ -24,7 +24,7 @@ public class ListaCliente {
     /**
      * Agregar un nuevo cliente a la lista
      * @param cliente Se ingresa una variable de tipo Cliente con todos sus atributos
-     * @return retorna un boleano verdadero si el cliente de agrego con exito, de lo contrario un false
+     * @return retorna un boleano verdadero si el cliente se agrego con exito, de lo contrario un false
      */
     public boolean agregarCliente(Cliente cliente){
         
@@ -47,7 +47,7 @@ public class ListaCliente {
     /**
      * Busca un cliente especifico ingresando un rut
      * @param rut se ingresa el rut a consultar
-     * @return retorna el cliente encontrado
+     * @return retorna la posición del cliente encontrado sino retorna -1 como indicador que no fue encontrado
      */
     public int getClientePorRut(String rut){
         for(int i = 0; i<cantElementos;i++){

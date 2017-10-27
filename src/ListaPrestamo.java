@@ -10,7 +10,7 @@ public class ListaPrestamo {
     private int cantElementos;
     /**
      * Constructor de la lista prestamos
-     * @param maxPrestamo asigna el valor inicial de 0 a la cantidad de prestamos ingresados
+     * @param maxPrestamo asigna el valor máximo que puede contener la lista
      */
     public ListaPrestamo(int maxPrestamo){
         
@@ -22,7 +22,7 @@ public class ListaPrestamo {
     /**
      * Metodo para agregar un nuevo prestamo a la lista
      * @param prestamo se ingresa una variable del tipo prestamo con sus atributos
-     * @return retorna un boleano verdadero si el prestamo de agrego con exito, de lo contrario un false
+     * @return retorna un boleano verdadero si el prestamo se agrego con exito, de lo contrario un false
      */
     public boolean agregarPrestamo(Prestamo prestamo){
         

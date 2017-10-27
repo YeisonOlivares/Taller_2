@@ -10,7 +10,7 @@ public class ListaLibro {
     private int cantElementos;
     /**
      * Constructor de la lista
-     * @param maxLibro asigna un valor inicial del total de elementos a 0
+     * @param maxLibro asigna el valor máximo que puede contener la lista
      */
     public ListaLibro(int maxLibro){
         
@@ -22,7 +22,7 @@ public class ListaLibro {
     /**
      * Metodo para agregar un nuevo libro a la lista
      * @param libro se ingresa una variable de tipo Libro con todos sus atributos
-     * @return retorna un boleano verdadero si el libro de agrego con exito, de lo contrario un false
+     * @return retorna un boleano verdadero si el libro se agrego con exito, de lo contrario un false
      */
     public boolean agregarLibro(Libro libro){
         
