@@ -11,7 +11,7 @@ import java.util.Date;
 public interface SistemaBiblioteca {
     
    void desplegarDeuda(String rut);
-   void libroMasSolicitado(Date fecha1, Date fecha2);
+   void libroMasSolicitado(String fecha1, String fecha2);
    void generarArchivo();
    void menuOpciones();
    

@@ -60,9 +60,8 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
                                 StdOut.println("La deuda asociada es de $700");
                                 deudaTotal += 700;
                             }
+                            StdOut.println("");
                         }
-
-                        
                     } catch (ParseException ex) {
                         
                     }
@@ -73,20 +72,79 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
     }
 
     @Override
-    public void libroMasSolicitado(Date fecha1, Date fecha2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void libroMasSolicitado(String fecha1, String fecha2) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String librosPedidos [][] = new String[listaPrestamo.getTotalPrestamos()][2];
+        int aux = 0;
+        int aux2 = 0;
+        
+        for (int i = 0; i < librosPedidos.length; i++) {
+            librosPedidos[i][0] = "0";
+            librosPedidos[i][1] = "0";
+        }
+        
+        try {
+            Date fechaInicio = formato.parse(fecha1);
+            Date fechaTermino = formato.parse(fecha2);
+            int diferenciaDias = (int) ((fechaTermino.getTime() - fechaInicio.getTime()) / 86400000);
+            
+            if (diferenciaDias >= 0) {
+                for (int i = 0; i < listaPrestamo.getTotalPrestamos(); i++) {
+                    int diferenciaIngreso = (int) ((listaPrestamo.getPrestamo(i).getFechaPrestamo().getTime() - fechaInicio.getTime()) / 86400000);
+                    if (diferenciaIngreso > 0 && diferenciaIngreso <= diferenciaDias) {
+                        for (int j = 0; j < librosPedidos.length; j++) {
+                            if (librosPedidos[j][0].compareTo(Integer.toString(listaPrestamo.getPrestamo(i).getLibroPedido())) == 0) {
+                                break;
+                            }
+                            aux++;
+                        }
+                        if (aux != librosPedidos.length) {
+                            int contador = Integer.parseInt(librosPedidos[aux][1]) + 1;
+                            librosPedidos[aux][1] = Integer.toString(contador);
+                        }
+                        if (aux == librosPedidos.length) {
+                            librosPedidos[aux2][0] = Integer.toString(listaPrestamo.getPrestamo(i).getLibroPedido());
+                            librosPedidos[aux2][1] = "1";
+                            aux2 ++;
+                        }
+                        aux = 0;
+                    }
+                }
+                int max = 0;
+
+                for (int i = 0; i < librosPedidos.length; i++) {
+                    if (Integer.parseInt(librosPedidos[i][1]) > max) {
+                        max = Integer.parseInt(librosPedidos[i][1]);
+                    }
+                }
+                StdOut.println("=====Los Libros mas solicitados=====");
+                for (int i = 0; i < librosPedidos.length; i++) {
+                    if (max == Integer.parseInt(librosPedidos[i][1])) {
+                        for (int j = 0; j < listaLibro.getTotalLibros(); j++) {
+                            if (Integer.parseInt(librosPedidos[i][0]) == listaLibro.getLibro(j).getIsbn()) {
+                                StdOut.println("Titulo: " + listaLibro.getLibro(j).getTitulo());
+                                StdOut.println("      -ISBN: " + listaLibro.getLibro(j).getIsbn());
+                                StdOut.println("      -Autor: " + listaLibro.getLibro(j).getAutor());
+                                StdOut.println("      -Año de publicacion: " + formato.format(listaLibro.getLibro(j).getAnnioPublic()));
+                                StdOut.println("      -Cantidad de veces Solicitado: " + max);
+                                StdOut.println("");
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            StdOut.println("la fecha es incorrecta");
+        }
     }
 
     @Override
     public void generarArchivo() {
-        Out arch = new Out ("Textos/Devoluciones_Pendientes.txt");
+                Out arch = new Out ("Textos/Devoluciones_Pendientes.txt");
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         //Ordenamiento
         for(int i =0;i<listaPrestamo.getTotalPrestamos() - 2;i++){
             for(int j=i+1;j<listaPrestamo.getTotalPrestamos() - 1; j++){
-                
-                
-                
                 Calendar calFecha1 = new GregorianCalendar();
                 calFecha1.setTime(listaPrestamo.getPrestamo(i).getFechaAproxEntrega());
                 
@@ -106,9 +164,9 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
         for(int i = 0; i <listaPrestamo.getTotalPrestamos(); i++){
             
             String rut = listaPrestamo.getPrestamo(i).getIdCliente();
-            StdOut.println(rut);
+            //StdOut.println(rut);
             int pos = listaCliente.getClientePorRut(rut);
-            StdOut.println(pos);
+            //StdOut.println(pos);
             
             if (listaPrestamo.getPrestamo(i).getFechaRealEntrega().equals("0") && pos != -1){
                 
@@ -126,15 +184,68 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
                         listaCliente.getCliente(pos).getEmail() + " " + 
                         listaPrestamo.getPrestamo(i).getLibroPedido());
                    
-            }
-            
-        }
-        
+            }   
+        }   
     }
 
     @Override
+    @SuppressWarnings("fallthrough")
     public void menuOpciones() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+        StdOut.println("######  Sistema Bibloteca UCN  ######");
+        StdOut.println("");
+        StdOut.println("");
+        StdOut.println("Opcion      |       Descripcion");
+        StdOut.println("    1       |       Mostrar deuda para un cliente en especifico.");
+        StdOut.println("    2       |       Buscar el libro mas solicitado.");
+        StdOut.println("    3       |       Generar archivo con devoluciones pendientes.");
+        StdOut.println("    9       |       Salir");
+        StdOut.println("");
+        StdOut.println("");
+        StdOut.print("Ingrese su opcion: ");
+        int opcion = StdIn.readInt();
+        switch(opcion){
+            case 1:
+                StdOut.print("Ingrese Rut a consultar: ");
+                String rut = StdIn.readString();
+                desplegarDeuda(rut);
+                StdOut.println("");
+                StdOut.print("Desea volver al menu principal? (Si = volver No = salir): ");
+                String volver = StdIn.readString();
+                if (volver.equalsIgnoreCase("si")) {
+                    menuOpciones();
+                } else {
+                    System.exit(0);
+                }
+            case 2:
+                StdOut.print("Ingrese la fecha inicial a consultar en formato dd/mm/aaaa: ");
+                String fecha1 = StdIn.readString();
+                StdOut.println("");
+                StdOut.print("Ingrese la fecha final a consultar en formato dd/mm/aaaa: ");
+                String fecha2 = StdIn.readString();
+                libroMasSolicitado(fecha1, fecha2);
+                StdOut.println("");
+                StdOut.print("Desea volver al menu principal? (Si = volver No = salir): ");
+                volver = StdIn.readString();
+                if (volver.equalsIgnoreCase("si")) {
+                    menuOpciones();
+                } else {
+                    System.exit(0);
+                }
+            case 3:
+                StdOut.println("Generando archivo en la ruta: /Textos/Devoluciones_Pendientes.txt ......");
+                generarArchivo();
+                StdOut.println("");
+                StdOut.println("Archivo Generado con exito!");
+                StdOut.println("");
+                StdOut.print("Desea volver al menu principal? (Si = volver No = salir): ");
+                volver = StdIn.readString();
+                if (volver.equalsIgnoreCase("si")) {
+                    menuOpciones();
+                } else {
+                    System.exit(0);
+                }
+            case 9:
+                System.exit(0);
+        }
+    }   
 }

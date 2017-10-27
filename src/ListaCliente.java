@@ -47,7 +47,7 @@ public class ListaCliente {
            }
         }
         return -1;
-    }
+    }    
     
     public int getTotalClientes(){
         return cantElementos;

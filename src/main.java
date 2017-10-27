@@ -26,10 +26,14 @@ public class main {
         GenerarListaLibros(libro);
         GenerarListaPrestamos(prestamo);
         SistemaBibliotecaImpl sys = new SistemaBibliotecaImpl(cliente, libro, prestamo);
-        String preguntaRut = StdIn.readString();
-        sys.desplegarDeuda(preguntaRut);
+        //String preguntaRut = StdIn.readString();
+        //sys.desplegarDeuda(preguntaRut);
+        //String fecha1 = StdIn.readString();
+        //String fecha2 = StdIn.readString();
+        //sys.libroMasSolicitado(fecha1, fecha2);
         
-        sys.generarArchivo();
+        sys.menuOpciones();
+        
         
     }
 
@@ -129,7 +133,7 @@ public class main {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaPedido = df.parse(registro[3]);
         Date fechaEstimada = df.parse(registro[4]);
-        Prestamo P1 = new Prestamo(registro[0], registro[1], registro[2], fechaPedido, fechaEstimada, registro[5]);
+        Prestamo P1 = new Prestamo(registro[0], registro[1], Integer.parseInt(registro[2]), fechaPedido, fechaEstimada, registro[5]);
         prestamo.agregarPrestamo(P1);
         int aux = 0;
         
@@ -146,7 +150,7 @@ public class main {
             if (aux == prestamo.getTotalPrestamos()) {
                 fechaPedido = df.parse(registro[3]);
                 fechaEstimada = df.parse(registro[4]);
-                P1 = new Prestamo(registro[0], registro[1], registro[2], fechaPedido, fechaEstimada, registro[5]);
+                P1 = new Prestamo(registro[0], registro[1], Integer.parseInt(registro[2]), fechaPedido, fechaEstimada, registro[5]);
                 prestamo.agregarPrestamo(P1);
             }
             aux = 0;

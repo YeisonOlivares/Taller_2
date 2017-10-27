@@ -23,19 +23,19 @@ public class Libro {
     }
     
     public int getIsbn(){
-        return isbn;
+        return this.isbn;
     }
     
     public String getTitulo(){
-        return titulo;
+        return this.titulo;
     }
     
     public String getAutor(){
-        return autor;
+        return this.autor;
     }
     
     public Date getAnnioPublic(){
-        return annioPublic;
+        return this.annioPublic;
     }
     
     public void setIsbn(int isbn){

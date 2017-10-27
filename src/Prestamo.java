@@ -12,12 +12,12 @@ public class Prestamo {
     
     private String codigo;
     private String idCliente;
-    private String libroPedido;
+    private int libroPedido;
     private Date fechaPrestamo;
     private Date fechaAproxEntrega;
     private String fechaRealEntrega;
     
-    public Prestamo(String codigo, String idCliente, String libroPedido, Date fechaPrestamo, Date fechaAproxEntrega, String fechaRealEntrega){
+    public Prestamo(String codigo, String idCliente, int libroPedido, Date fechaPrestamo, Date fechaAproxEntrega, String fechaRealEntrega){
         
         this.codigo = codigo;
         this.idCliente = idCliente;
@@ -36,7 +36,7 @@ public class Prestamo {
         return this.idCliente;
     }
     
-    public String getLibroPedido(){
+    public int getLibroPedido(){
         return this.libroPedido;
     }
     
@@ -60,7 +60,7 @@ public class Prestamo {
         this.idCliente = idCliente;
     }
     
-    public void setLibroPedido(String libroPedido){
+    public void setLibroPedido(int libroPedido){
         this.libroPedido = libroPedido;
     }
     
