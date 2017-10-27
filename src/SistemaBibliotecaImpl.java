@@ -276,7 +276,7 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
                     menuOpciones();
                 }
             case 9:
-                StdOut.println("Formateando C:/*..");
+                StdOut.println("Cerrando el Sistema...");
                 System.exit(0);
                 
             default:
