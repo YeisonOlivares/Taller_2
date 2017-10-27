@@ -26,12 +26,6 @@ public class main {
         GenerarListaLibros(libro);
         GenerarListaPrestamos(prestamo);
         SistemaBibliotecaImpl sys = new SistemaBibliotecaImpl(cliente, libro, prestamo);
-        //String preguntaRut = StdIn.readString();
-        //sys.desplegarDeuda(preguntaRut);
-        //String fecha1 = StdIn.readString();
-        //String fecha2 = StdIn.readString();
-        //sys.libroMasSolicitado(fecha1, fecha2);
-        
         sys.menuOpciones();
         
         
