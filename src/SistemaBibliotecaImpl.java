@@ -105,13 +105,10 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
         //Crear Archivo
         for(int i = 0; i <listaPrestamo.getTotalPrestamos(); i++){
             
-            
-            
             String rut = listaPrestamo.getPrestamo(i).getIdCliente();
             StdOut.println(rut);
             int pos = listaCliente.getClientePorRut(rut);
             StdOut.println(pos);
-            
             
             if (listaPrestamo.getPrestamo(i).getFechaRealEntrega().equals("0") && pos != -1){
                 
@@ -119,7 +116,6 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
                 Date fechaAprox = listaPrestamo.getPrestamo(i).getFechaAproxEntrega();
                 String fP = formato.format(fechaPrestamo);
                 String fA = formato.format(fechaAprox);
-                
                 
                 arch.println(listaPrestamo.getPrestamo(i).getCodigo() + " " + 
                         fP + " " +
@@ -133,11 +129,6 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
             }
             
         }
-        
-        for(int i = 0;i<listaPrestamo.getTotalPrestamos();i++){
-        StdOut.println(listaPrestamo.getPrestamo(i).getFechaAproxEntrega());
-    }
-        
         
     }
 
