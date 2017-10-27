@@ -5,8 +5,8 @@
  */
 import java.util.Date;
 /**
- *
- * @author Wolf Paradise
+ * Interface para implementar los contratos de acuerdo a los requerimientos del taller 2
+ * @author Yeison Olivares, Rodrigo Dominguez
  */
 public interface SistemaBiblioteca {
     
@@ -14,6 +14,5 @@ public interface SistemaBiblioteca {
    void libroMasSolicitado(String fecha1, String fecha2);
    void generarArchivo();
    void menuOpciones();
-   
-   
+
 }

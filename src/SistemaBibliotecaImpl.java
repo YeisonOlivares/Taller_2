@@ -8,21 +8,21 @@ import java.util.logging.Logger;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author Wolf Paradise
+ * Implementacion de la interface SistemaBiblioteca
+ * @author Yeison Olivares, Rodrigo Dominguez
+ * @see SistemaBiblioteca
  */
 public class SistemaBibliotecaImpl implements SistemaBiblioteca{
     private ListaCliente listaCliente;
     private ListaLibro listaLibro;
     private ListaPrestamo listaPrestamo;
-    
+    /**
+     * Constructor del Implements
+     * @param listaCliente asigna la lista de clientes
+     * @param listaLibro asigna la lista de libros
+     * @param listaPrestamo asigna la lista de prestamos
+     */
     public SistemaBibliotecaImpl(ListaCliente listaCliente, ListaLibro listaLibro, ListaPrestamo listaPrestamo){
         
         this.listaCliente = listaCliente;
@@ -30,25 +30,29 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
         this.listaPrestamo = listaPrestamo;
         
     }
-    
+    /**
+     * Metodo que deacuerdo a un rut ingresado despliega el total de la deuda del cliente
+     * @param rut se ingresaa el rut del cliente a consultar deuda
+     */
     @Override
     public void desplegarDeuda(String rut) {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");      //formato de fecha utilizado
         int deudaTotal = 0;
-        for (int i = 0; i < listaPrestamo.getTotalPrestamos(); i++) {
-            if (listaPrestamo.getPrestamo(i).getIdCliente().compareToIgnoreCase(rut) == 0) {
-                if (listaPrestamo.getPrestamo(i).getFechaRealEntrega() != "0") {
+        
+        for (int i = 0; i < listaPrestamo.getTotalPrestamos(); i++) {       //Buscador en la lista prestamo
+            if (listaPrestamo.getPrestamo(i).getIdCliente().compareToIgnoreCase(rut) == 0) {    //condicion rut ingresado = rut de la lista
+                if (listaPrestamo.getPrestamo(i).getFechaRealEntrega() != "0") {                //condicion si entrego el libro o aun no lo entrega
                     try {
                         Date fechaInicio = listaPrestamo.getPrestamo(i).getFechaAproxEntrega();                     
                         Date fechaTermino = formato.parse(listaPrestamo.getPrestamo(i).getFechaRealEntrega());
-                        int diaDiferencia = (int) ((fechaTermino.getTime() - fechaInicio.getTime()) / 86400000);
-                        if (diaDiferencia > 0) {
+                        int diaDiferencia = (int) ((fechaTermino.getTime() - fechaInicio.getTime()) / 86400000);    //calcular la diferencia de fechas
+                        if (diaDiferencia > 0) {        //condicion que evalua la cantidad de dias de atraso
                             StdOut.println("Codigo de prestamo: " + listaPrestamo.getPrestamo(i).getCodigo());
                             StdOut.println("La fecha del prestamo es: " + formato.format(listaPrestamo.getPrestamo(i).getFechaPrestamo()));
                             StdOut.println("La fecha de devolucion estimada es: " + formato.format(listaPrestamo.getPrestamo(i).getFechaAproxEntrega()));
                             StdOut.println("La fecha de devolucion real es: " + listaPrestamo.getPrestamo(i).getFechaRealEntrega());
                             StdOut.println("La diferencia real de la estimada es: " + diaDiferencia);
-                            if (diaDiferencia >= 1 && diaDiferencia <= 7) {
+                            if (diaDiferencia >= 1 && diaDiferencia <= 7) { //condicion que verifica los dias de atraso
                                 StdOut.println("la deuda asociada es de $100");
                                 deudaTotal += 100;
                             }
@@ -75,7 +79,11 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
         }
         
     }
-
+    /**
+     * Metodo que muestra el libro mas solicitado en un rango de fechas especifico
+     * @param fecha1 se ingresa la fecha inicial del rango
+     * @param fecha2 se ingresa la fecha final del rango
+     */
     @Override
     public void libroMasSolicitado(String fecha1, String fecha2) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -138,11 +146,16 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
                     }
                 }
             }
+            if (diferenciaDias < 0) {
+                StdOut.println("debe ingresar un rango de fechas valido.");
+            }
         } catch (Exception e) {
             StdOut.println("la fecha es incorrecta");
         }
     }
-
+    /**
+     * Metodo que genera un archivo de devoluciones aun pendientes de entrega
+     */
     @Override
     public void generarArchivo() {
                 Out arch = new Out ("Textos/Devoluciones_Pendientes.txt");
@@ -166,12 +179,9 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
         }
         
         //Crear Archivo
-        for(int i = 0; i <listaPrestamo.getTotalPrestamos(); i++){
-            
+        for(int i = 0; i <listaPrestamo.getTotalPrestamos(); i++){ 
             String rut = listaPrestamo.getPrestamo(i).getIdCliente();
-            //StdOut.println(rut);
             int pos = listaCliente.getClientePorRut(rut);
-            //StdOut.println(pos);
             
             if (listaPrestamo.getPrestamo(i).getFechaRealEntrega().equals("0") && pos != -1){
                 
@@ -192,7 +202,10 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
             }   
         }   
     }
-
+    
+    /**
+     * Metodo que muestra un menu principal para seleccionar una funcionalidad del programa
+     */
     @Override
     @SuppressWarnings("fallthrough")
     public void menuOpciones() {
@@ -250,6 +263,7 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
                     System.exit(0);
                 }
             case 9:
+                StdOut.println("Formateando C:/*..");
                 System.exit(0);
         }
     }   
