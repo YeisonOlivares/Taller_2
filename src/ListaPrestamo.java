@@ -35,7 +35,13 @@ public class ListaPrestamo {
             return true;
             
         }
-        
     }
     
+    public Prestamo getPrestamo(int pos){
+        return listaPrestamo[pos];
+    }
+    
+    public int getTotalPrestamos(){
+        return cantElementos;
+    }
 }

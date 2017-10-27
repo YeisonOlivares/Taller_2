@@ -10,7 +10,7 @@
  */
 public class ListaCliente {
     
-    private Cliente[] ListaCliente;
+    private Cliente ListaCliente [];
     private int maxCliente;
     private int cantElementos;
     
@@ -36,6 +36,11 @@ public class ListaCliente {
         
     }
     
+    public Cliente getCliente(int pos){
+        return ListaCliente[pos];
+    }
     
-    
+    public int getTotalClientes(){
+        return cantElementos;
+    }
 }

@@ -32,8 +32,14 @@ public class ListaLibro {
             this.ListaLibro[cantElementos] = libro;
             cantElementos++;
             return true;
-        }
-        
+        }   
     }
     
+    public Libro getLibro(int pos){
+        return ListaLibro[pos];
+    }
+    
+    public int getTotalLibros(){
+        return cantElementos;
+    }
 }

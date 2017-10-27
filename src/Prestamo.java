@@ -15,9 +15,9 @@ public class Prestamo {
     private String libroPedido;
     private Date fechaPrestamo;
     private Date fechaAproxEntrega;
-    private Date fechaRealEntrega;
+    private String fechaRealEntrega;
     
-    public Prestamo(String codigo, String idCliente, String libroPedido, Date fechaPrestamo, Date fechaAproxEntrega, Date fechaRealEntrega){
+    public Prestamo(String codigo, String idCliente, String libroPedido, Date fechaPrestamo, Date fechaAproxEntrega, String fechaRealEntrega){
         
         this.codigo = codigo;
         this.idCliente = idCliente;
@@ -48,7 +48,7 @@ public class Prestamo {
         return this.fechaAproxEntrega;
     }
     
-    public Date getFechaRealEntrega(){
+    public String getFechaRealEntrega(){
         return this.fechaRealEntrega;
     }
     
@@ -72,7 +72,7 @@ public class Prestamo {
         this.fechaAproxEntrega = fechaAproxEntrega;
     }
     
-    public void setFechaRealEntrega(Date fechaRealEntrega){
+    public void setFechaRealEntrega(String fechaRealEntrega){
         this.fechaRealEntrega = fechaRealEntrega;
     }
     
