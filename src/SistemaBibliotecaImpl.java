@@ -68,7 +68,12 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
                 }
             }
         }
-        StdOut.println("La deuda total es de: $" + deudaTotal);
+        if (deudaTotal > 0) {
+            StdOut.println("La deuda total es de: $" + deudaTotal);
+        }else{
+            StdOut.println("El rut ingresado no presenta deudas.");
+        }
+        
     }
 
     @Override
