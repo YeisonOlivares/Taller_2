@@ -220,8 +220,10 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
         StdOut.println("");
         StdOut.println("");
         StdOut.print("Ingrese su opcion: ");
-        int opcion = StdIn.readInt();
-        switch(opcion){
+        String opcionS = StdIn.readString();
+        try {
+            int opcion = Integer.parseInt(opcionS);
+            switch(opcion){
             case 1:
                 StdOut.print("Ingrese Rut a consultar: ");
                 String rut = StdIn.readString();
@@ -231,9 +233,14 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
                 String volver = StdIn.readString();
                 if (volver.equalsIgnoreCase("si")) {
                     menuOpciones();
-                } else {
+                }else if (volver.equalsIgnoreCase("no")) {
                     System.exit(0);
+                }else if (true) {
+                    StdOut.println("Opcion no valida. Vuelva a intentarlo");
+                    menuOpciones();
                 }
+                
+                
             case 2:
                 StdOut.print("Ingrese la fecha inicial a consultar en formato dd/mm/aaaa: ");
                 String fecha1 = StdIn.readString();
@@ -246,8 +253,11 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
                 volver = StdIn.readString();
                 if (volver.equalsIgnoreCase("si")) {
                     menuOpciones();
-                } else {
+                }else if (volver.equalsIgnoreCase("no")) {
                     System.exit(0);
+                }else if (true) {
+                    StdOut.println("Opcion no valida. Vuelva a intentarlo");
+                    menuOpciones();
                 }
             case 3:
                 StdOut.println("Generando archivo en la ruta: /Textos/Devoluciones_Pendientes.txt ......");
@@ -259,12 +269,25 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
                 volver = StdIn.readString();
                 if (volver.equalsIgnoreCase("si")) {
                     menuOpciones();
-                } else {
+                }else if (volver.equalsIgnoreCase("no")) {
                     System.exit(0);
+                }else if (true) {
+                    StdOut.println("Opcion no valida. Vuelva a intentarlo");
+                    menuOpciones();
                 }
             case 9:
                 StdOut.println("Formateando C:/*..");
                 System.exit(0);
+                
+            default:
+                StdOut.println("Opcion no valida, Reintente");
+                menuOpciones();
         }
+        } catch (Exception e) {
+            StdOut.println("La opcion ingresada no es valida debe ingresar un numero");
+            menuOpciones();
+        }
+        
+        
     }   
 }
