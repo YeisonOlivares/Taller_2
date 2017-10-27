@@ -44,4 +44,8 @@ public class ListaPrestamo {
     public int getTotalPrestamos(){
         return cantElementos;
     }
+    
+    public void setPrestamo(int pos, Prestamo prestamo){
+        listaPrestamo[pos] = prestamo;
+    }
 }

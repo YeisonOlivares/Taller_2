@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -77,7 +79,66 @@ public class SistemaBibliotecaImpl implements SistemaBiblioteca{
 
     @Override
     public void generarArchivo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Out arch = new Out ("Textos/Devoluciones_Pendientes.txt");
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        //Ordenamiento
+        for(int i =0;i<listaPrestamo.getTotalPrestamos() - 2;i++){
+            for(int j=i+1;j<listaPrestamo.getTotalPrestamos() - 1; j++){
+                
+                
+                
+                Calendar calFecha1 = new GregorianCalendar();
+                calFecha1.setTime(listaPrestamo.getPrestamo(i).getFechaAproxEntrega());
+                
+                Calendar calFecha2 = new GregorianCalendar();
+                calFecha2.setTime(listaPrestamo.getPrestamo(j).getFechaAproxEntrega());
+                
+                if(calFecha2.before(calFecha1)){
+                    Prestamo aux1 = listaPrestamo.getPrestamo(i);
+                    Prestamo aux2 = listaPrestamo.getPrestamo(j);
+                    listaPrestamo.setPrestamo(i, aux2);
+                    listaPrestamo.setPrestamo(j, aux1);
+                }
+            }
+        }
+        
+        //Crear Archivo
+        for(int i = 0; i <listaPrestamo.getTotalPrestamos(); i++){
+            
+            
+            
+            String rut = listaPrestamo.getPrestamo(i).getIdCliente();
+            StdOut.println(rut);
+            int pos = listaCliente.getClientePorRut(rut);
+            StdOut.println(pos);
+            
+            
+            if (listaPrestamo.getPrestamo(i).getFechaRealEntrega().equals("0") && pos != -1){
+                
+                Date fechaPrestamo = listaPrestamo.getPrestamo(i).getFechaPrestamo();
+                Date fechaAprox = listaPrestamo.getPrestamo(i).getFechaAproxEntrega();
+                String fP = formato.format(fechaPrestamo);
+                String fA = formato.format(fechaAprox);
+                
+                
+                arch.println(listaPrestamo.getPrestamo(i).getCodigo() + " " + 
+                        fP + " " +
+                        fA + " " +
+                        listaCliente.getCliente(pos).getApellido() + " " + 
+                        listaCliente.getCliente(pos).getNombre() + " " + 
+                        listaCliente.getCliente(pos).getCelular() + " " + 
+                        listaCliente.getCliente(pos).getEmail() + " " + 
+                        listaPrestamo.getPrestamo(i).getLibroPedido());
+                   
+            }
+            
+        }
+        
+        for(int i = 0;i<listaPrestamo.getTotalPrestamos();i++){
+        StdOut.println(listaPrestamo.getPrestamo(i).getFechaAproxEntrega());
+    }
+        
+        
     }
 
     @Override

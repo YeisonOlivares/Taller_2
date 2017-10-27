@@ -28,27 +28,27 @@ public class Cliente {
     }
     
     public String getRut(){
-        return this.rut;
+        return rut;
     }
     
     public String getNombre(){
-        return this.nombre;
+        return nombre;
     }
     
     public String getApellido(){
-        return this.apellido;
+        return apellido;
     }
     
     public int getCelular(){
-        return this.celular;
+        return celular;
     }
     
     public String getEmail(){
-        return this.email;
+        return email;
     }
     
     public ListaPrestamo getlistaPrestamo(){
-        return this.listaPrestamo;
+        return listaPrestamo;
     }
     
     public void setNombre(String nombre){

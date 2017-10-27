@@ -29,7 +29,7 @@ public class main {
         String preguntaRut = StdIn.readString();
         sys.desplegarDeuda(preguntaRut);
         
-        
+        sys.generarArchivo();
         
     }
 

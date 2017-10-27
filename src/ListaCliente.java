@@ -40,6 +40,15 @@ public class ListaCliente {
         return ListaCliente[pos];
     }
     
+    public int getClientePorRut(String rut){
+        for(int i = 0; i<cantElementos;i++){
+           if(ListaCliente[i].getRut().equals(rut)){
+               return i;
+           }
+        }
+        return -1;
+    }
+    
     public int getTotalClientes(){
         return cantElementos;
     }
