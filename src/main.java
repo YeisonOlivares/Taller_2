@@ -25,8 +25,10 @@ public class main {
         GenerarListaClientes(cliente);
         GenerarListaLibros(libro);
         GenerarListaPrestamos(prestamo);
-        StdOut.print(prestamo.getTotalPrestamos());
         SistemaBibliotecaImpl sys = new SistemaBibliotecaImpl(cliente, libro, prestamo);
+        String preguntaRut = StdIn.readString();
+        sys.desplegarDeuda(preguntaRut);
+        
         
         
     }
@@ -124,7 +126,7 @@ public class main {
         In archivo = new In("Textos/Prestamos.txt");
         String linea = archivo.readLine();
         String registro [] = linea.split(",");
-        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaPedido = df.parse(registro[3]);
         Date fechaEstimada = df.parse(registro[4]);
         Prestamo P1 = new Prestamo(registro[0], registro[1], registro[2], fechaPedido, fechaEstimada, registro[5]);
@@ -142,6 +144,8 @@ public class main {
                 aux++;
             }
             if (aux == prestamo.getTotalPrestamos()) {
+                fechaPedido = df.parse(registro[3]);
+                fechaEstimada = df.parse(registro[4]);
                 P1 = new Prestamo(registro[0], registro[1], registro[2], fechaPedido, fechaEstimada, registro[5]);
                 prestamo.agregarPrestamo(P1);
             }
